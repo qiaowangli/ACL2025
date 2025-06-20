@@ -1,12 +1,17 @@
 # Optimizing Human Genomics Representation via Contrastive Learning
 
 This repository contains some of the code and pre-trained models used in the project *"Optimizing Human Genomics Representation via Contrastive Learning"*.
+
+**Note:** This document is continuously being updated — more scripts and models will be uploaded soon.
+
 ## Project Structure
 
 - `code/`: Contains scripts and modules for:
-  - **Further_Pre_training.py**: Continued training of genomic transformer models (e.g., DNABERT, DNABERT-2, DNABERT-S) on target datasets such as domain-specific and public hg38 data.
-  - **Fine_tuning.py**: Supervised training scripts for downstream classification tasks.
-  - **Evaluation**: A bash file for Fine-tuning.
+  - **cl_normal.py**: A sample script for continued training of genomic transformer models on target datasets
+  - **train.py**: Supervised training scripts for downstream classification tasks.
+  - **run_dnabert**: A bash file for Fine-tuning DNABERT.
+  - **run_dnabert2**: A bash file for Fine-tuning DNABERT-2.
+  - **run_dnaberts**: A bash file for Fine-tuning DNABERT-S.
   - **Requirements.txt**: A `requirements.txt` file listing all necessary packages for running the codebase.
 
 - `trained_model/`: Includes some of the selected pre-trained model checkpoints:
@@ -31,8 +36,15 @@ To install the dependencies, run:
 pip install -r code/requirements.txt
 ```
 
-<!-- To apply further pre-trainning, run:
+To apply further pre-trainning, run:
 
 ```bash
-pip install -r code/requirements.txt
-``` -->
+nohup python3 cl_normal.py > log/cl_normal_256.log 2>&1
+# You need to config the path to store the trained model
+```
+
+To apply fine-tuning, run:
+
+```bash
+ nohup sh run_dnaberts.sh /Path to your model/pytorch_model.bin  folder_name > log_name.log 2>&1
+```
